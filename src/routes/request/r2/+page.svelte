@@ -6,8 +6,6 @@
 
 	let requestId = $state(0);
 	let songPick = $state('');
-	let errorMessage = '';
-
 
 	onMount(() => {
 		const urlParams = new URLSearchParams(window.location.search);
@@ -16,6 +14,7 @@
 
 	$inspect(requestId, songPick);
 
+	let errorMessage = $state('');
 
 	const submitForm = async (e: Event) => {
 		e.preventDefault();

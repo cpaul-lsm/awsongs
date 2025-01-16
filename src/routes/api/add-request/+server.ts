@@ -24,3 +24,10 @@ export async function POST({ request }) {
         });
     }
 }
+
+export async function GET() {
+    return new Response(JSON.stringify({ error: 'Method Not Allowed' }), {
+        status: 405,
+        headers: { 'Content-Type': 'application/json' }
+    });
+}

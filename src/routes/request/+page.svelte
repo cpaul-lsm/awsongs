@@ -32,7 +32,7 @@
 		comments: ''
 	});
 
-	let errorMessage = '';
+	let errorMessage = $state('');
 
 	import { goto } from '$app/navigation';
 
