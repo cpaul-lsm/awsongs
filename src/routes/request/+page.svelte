@@ -81,7 +81,7 @@
 				<img src="/images/aw-logo-burg.png" alt="" class="mb-6" />
 			</a>
 			<p class="md:text-lg">
-				We love to sing songs people enjoy. <br> Pick a song from our list and we will play it for you. <br
+				We love to sing songs people enjoy. <br> Pick a song from our list and we will play it for you! <br
 				/>
 				<span class="text-sm"
 					>You can also dedicate the song to someone or leave a message for us.</span
