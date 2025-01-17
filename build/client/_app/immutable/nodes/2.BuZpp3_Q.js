@@ -1,0 +1,1 @@
+import"../chunks/disclose-version.Bg9kRutz.js";import"../chunks/legacy.BZ-BDUQO.js";import{p,a as r}from"../chunks/runtime.DAUSjKms.js";import{i as t}from"../chunks/lifecycle.B5bOo5d6.js";import{o as i}from"../chunks/index-client.BUs9hEbT.js";function c(a,o){p(o,!1),i(()=>{window.location.href="/request/"}),t(),r()}export{c as component};
