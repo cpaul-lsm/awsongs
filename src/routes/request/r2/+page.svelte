@@ -9,10 +9,9 @@
 
 	onMount(() => {
 		const urlParams = new URLSearchParams(window.location.search);
-		requestId = Number(urlParams.get('requestId')) || 0;
+		requestId = urlParams.get('requestId') || '';
+		$inspect(requestId);
 	});
-
-	$inspect(requestId, songPick);
 
 	let errorMessage = $state('');
 
