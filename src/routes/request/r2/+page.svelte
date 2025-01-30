@@ -9,7 +9,7 @@
 
 	onMount(() => {
 		const urlParams = new URLSearchParams(window.location.search);
-		requestId = urlParams.get('requestId') || '';
+		requestId = Number(urlParams.get('requestId')) || 0;
 		$inspect(requestId);
 	});
 
