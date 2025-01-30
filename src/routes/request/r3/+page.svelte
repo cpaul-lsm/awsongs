@@ -36,7 +36,7 @@
 				class="btn mr-6 flex bg-gray-800 text-white hover:bg-gray-700 hover:text-white"
 				>Send a Tip</a
 			>
-			<a href="/contact" class="btn flex bg-gray-600 text-white hover:bg-gray-500 hover:text-white"
+			<a href="https://acaciawoodmusic.com/contact-us/" class="btn flex bg-gray-600 text-white hover:bg-gray-500 hover:text-white"
 				>Follow Us</a
 			>
 		</div>
