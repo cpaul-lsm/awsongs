@@ -1,13 +1,20 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import requests from '$lib/database/requests.json';
+	import { getStores } from '$app/stores';
 
-	let requestId = $state(0);
+	const { page } = getStores();
+	const { data } = $props();
+	let requests = data.requests || [];
+	let rId = $state('');
 
+	// Get URL parameter `rID` and set it to `rId`
 	onMount(() => {
-		const urlParams = new URLSearchParams(window.location.search);
-		requestId = Number(urlParams.get('requestId')) || 0;
-	});
+	if ($page.url.searchParams.has('rID')) {
+	  rId = $page.url.searchParams.get('rID') || '';
+	} else {
+	  rId = ''; 
+	}
+  });
 </script>
 
 <section class="request-result flex max-w-5xl flex-col items-center justify-center py-6">
@@ -17,14 +24,14 @@
 		</a>
 		<p class="text-center">
 			{#each requests as request}
-				{#if request.id == requestId}
+				{#if request.id == rId}
 					Thank you <strong>{request.firstname}</strong> for requesting a song. <br /> We will play
 					<strong>{request.song}</strong> for you shortly.
 				{/if}
 			{/each}
 		</p>
 		{#each requests as request}
-			{#if request.id == requestId}
+			{#if request.id == rId}
 				<p class="text-center"><span class="font-bold">Comments:</span><br /> {request.comments}</p>
 			{/if}
 		{/each}

@@ -1,35 +1,24 @@
 <script lang="ts">
-    import requests from '$lib/database/requests.json';
+     import type { PageData } from './$types';
+  
+  	export let data: PageData;
 
-	// Function to get today's date
-    function getTodayDate() {
-        const now = new Date();
-        const options = { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' };
-        const formatter = new Intl.DateTimeFormat('en-US', options);
-        const [{ value: month },,{ value: day },,{ value: year }] = formatter.formatToParts(now);
-        return `${year}-${month}-${day}`;
+	  $: if (data && data.requests) {
+      console.log("Requests data:", data.requests);
     }
 
-	function getNewDate() {
-        const now = new Date();
-        const options = { timeZone: 'America/New_York', year: 'numeric', month: 'long', day: '2-digit' };
-        const formatter = new Intl.DateTimeFormat('en-US', options);
-        const [{ value: month },,{ value: day },,{ value: year }] = formatter.formatToParts(now);
-        return `${month} ${day} ${year}`;
-    }
+	let requests = data.requests || [];
 
-    // Set today's date in a variable
-    const todayDate = getTodayDate();
-	const currentDate = getNewDate();
+	const formattedDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-    // Sort the requests by time ascending
+	// Sort the requests by time ascending
     const sortedRequests = requests.slice().sort((a, b) => {
         return new Date(a.date + 'T' + a.time) - new Date(b.date + 'T' + b.time);
     });
 </script>
 
 <section class="watch mx-auto flex max-w-5xl flex-col items-center justify-center">
-	<p class="text-lg mt-6">Requested Songs on {currentDate}</p>
+	<p class="text-lg mt-6">Requested Songs on {formattedDate}</p>
 	<table class="table table-zebra">
 		<thead>
 			<tr class="bg-gray-800 text-lg text-white">
@@ -39,15 +28,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each sortedRequests as pick}
-			{#if pick.date === todayDate}
+			{#each sortedRequests as request}
 				<tr>
-					<td>{pick.firstname}</td>
-					<td>{pick.song}</td>
-					<td>{pick.time}</td>
+					<td>{request.firstname}</td>
+					<td>{request.song}</td>
+					<td>{request.requestedAt}</td>
 				</tr>
-				<tr><td colspan="3">"{pick.comments}""</td></tr>
-			{/if}
+				<tr><td colspan="3">"{request.comments}""</td></tr>
 			{/each}
 		</tbody>
 	</table>
