@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	
+	import { enhance } from '$app/forms';
 	const todaysDate = new Date().toLocaleDateString();
 	const rId = Math.floor(Math.random() * 1000000);
 	const requestDetails = $state({
@@ -15,7 +14,17 @@
 </script>
 
 <section class="request flex max-w-5xl flex-col items-center justify-center py-6">
-	<form class="w-2/3 rounded-xl border border-gray-300 p-6">
+	<form method="POST" 
+	use:enhance={() => {
+		return async ({ result }) => {
+			if (result.type === 'success') {
+				window.location.href = `/request/r2/?rId=${rId}`;
+			} else if (result.type === 'failure') {
+				errorMessage = result.data?.formResult?.error || 'Failed to submit request';
+			}
+		};
+	}}
+	class="w-2/3 rounded-xl border border-gray-300 p-6">
 		<div class="text-center">
 			<a href="/" class="contents">
 				<img src="/images/aw-logo-burg.png" alt="" class="mb-6" />
@@ -29,20 +38,23 @@
 				>
 			</p>
 		</div>
+		<input type="hidden" name="requestId" value="{rId}" />
 		<label class="input input-bordered flex items-center gap-2">
 			<i class="bi bi-person-fill opacity-70"></i>
 			<input
 				type="text"
 				name="firstname"
+				bind:value={requestDetails.firstname}
 				class="w-11/12"
-				
 				placeholder="First name"
 			/>
 		</label>
 
 		<textarea
-			placeholder="Dedication or Comment"
-			class="textarea textarea-bordered mt-6 w-11/12"
+		name = "comments"
+		bind:value={requestDetails.comments}	
+		placeholder="Dedication or Comment"
+		class="textarea textarea-bordered mt-6 w-11/12"
 		></textarea>
 
 		{#if errorMessage}
