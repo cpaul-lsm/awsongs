@@ -31,7 +31,6 @@
 			<a href="/" class="contents">
 				<img src="/images/aw-logo-burg.png" alt="" class="mb-6" />
 			</a>
-			<p>Request ID: {rId}</p>
 			<p class="md:text-lg">
 				We love to sing songs people enjoy. <br> Pick a song from our list and we will play it for you! <br
 				/>

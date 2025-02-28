@@ -1,7 +1,8 @@
 <script>
-    import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
+  import { goto } from '$app/navigation';
 
-    onMount(() => {
-      window.location.href = '/request/';
-    });
-  </script>
+  onMount(() => {
+    goto('/request/');
+  });
+</script>
