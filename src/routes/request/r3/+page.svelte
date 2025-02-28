@@ -9,12 +9,14 @@
 
 	// Get URL parameter `rID` and set it to `rId`
 	onMount(() => {
-	if ($page.url.searchParams.has('rID')) {
-	  rId = $page.url.searchParams.get('rID') || '';
-	} else {
-	  rId = ''; 
-	}
-  });
+		if ($page.url.searchParams.has('rId')) {
+			rId = $page.url.searchParams.get('rId');
+			console.log('rId from URL:', rId);
+		} else {
+			rId = '';
+			console.log('No rId in URL');
+		}
+	});
 </script>
 
 <section class="request-result flex max-w-5xl flex-col items-center justify-center py-6">
