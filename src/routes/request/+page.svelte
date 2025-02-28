@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
+	
 	const todaysDate = new Date().toLocaleDateString();
 	const rId = Math.floor(Math.random() * 1000000);
 	const requestDetails = $state({
@@ -18,7 +20,7 @@
 	use:enhance={() => {
 		return async ({ result }) => {
 			if (result.type === 'success') {
-				window.location.href = `/request/r2/?rId=${rId}`;
+				await goto(`/request/r2/?rId=${rId}`);
 			} else if (result.type === 'failure') {
 				errorMessage = result.data?.formResult?.error || 'Failed to submit request';
 			}
