@@ -1,13 +1,13 @@
 node_modules
 
-# Output
+# Build outputs
+.build
 .output
 .vercel
 .netlify
 .wrangler
-/.svelte-kit
-/src
-/static
+/.svelte-kit/build
+/.svelte-kit/output
 
 .npmrc
 .prettierrc

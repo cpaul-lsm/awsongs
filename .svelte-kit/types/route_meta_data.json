@@ -1,0 +1,16 @@
+{
+	"/": [],
+	"/request": [
+		"src/routes/request/+page.server.ts"
+	],
+	"/request/r2": [
+		"src/routes/request/r2/+page.server.ts"
+	],
+	"/request/r3": [
+		"src/routes/request/r3/+page.server.ts"
+	],
+	"/tips": [],
+	"/watch": [
+		"src/routes/watch/+page.server.ts"
+	]
+}
