@@ -26,6 +26,8 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const SANITY_PROJECT_ID: string;
+	export const SANITY_DATASET: string;
 	export const SANITY_WRITE_TOKEN: string;
 	export const NVM_INC: string;
 	export const TERM_PROGRAM: string;
@@ -34,9 +36,8 @@ declare module '$env/static/private' {
 	export const NVM_CD_FLAGS: string;
 	export const TERM: string;
 	export const SHELL: string;
-	export const npm_config_metrics_registry: string;
-	export const HOMEBREW_REPOSITORY: string;
 	export const TMPDIR: string;
+	export const HOMEBREW_REPOSITORY: string;
 	export const npm_config_global_prefix: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const CURSOR_TRACE_ID: string;
@@ -101,8 +102,7 @@ declare module '$env/static/private' {
  * ```
  */
 declare module '$env/static/public' {
-	export const PUBLIC_SANITY_PROJECT_ID: string;
-	export const PUBLIC_SANITY_DATASET: string;
+	
 }
 
 /**
@@ -121,6 +121,8 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		SANITY_PROJECT_ID: string;
+		SANITY_DATASET: string;
 		SANITY_WRITE_TOKEN: string;
 		NVM_INC: string;
 		TERM_PROGRAM: string;
@@ -129,9 +131,8 @@ declare module '$env/dynamic/private' {
 		NVM_CD_FLAGS: string;
 		TERM: string;
 		SHELL: string;
-		npm_config_metrics_registry: string;
-		HOMEBREW_REPOSITORY: string;
 		TMPDIR: string;
+		HOMEBREW_REPOSITORY: string;
 		npm_config_global_prefix: string;
 		TERM_PROGRAM_VERSION: string;
 		CURSOR_TRACE_ID: string;
@@ -203,8 +204,6 @@ declare module '$env/dynamic/private' {
  */
 declare module '$env/dynamic/public' {
 	export const env: {
-		PUBLIC_SANITY_PROJECT_ID: string;
-		PUBLIC_SANITY_DATASET: string;
 		[key: `PUBLIC_${string}`]: string | undefined;
 	}
 }
