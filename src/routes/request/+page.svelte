@@ -41,7 +41,7 @@
 			</p>
 		</div>
 		<input type="hidden" name="requestId" value="{rId}" />
-		<label class="input input-bordered flex items-center gap-2">
+		<label class="input input-bordered flex items-center gap-2 bg-white">
 			<i class="bi bi-person-fill opacity-70"></i>
 			<input
 				type="text"
@@ -56,7 +56,7 @@
 		name = "comments"
 		bind:value={requestDetails.comments}	
 		placeholder="Dedication or Comment"
-		class="textarea textarea-bordered mt-6 w-11/12"
+		class="textarea textarea-bordered mt-6 w-11/12 bg-white"
 		></textarea>
 
 		{#if errorMessage}
