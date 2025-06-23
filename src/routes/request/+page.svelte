@@ -27,7 +27,7 @@
 			}
 		};
 	}}
-	class="w-2/3 rounded-xl border border-gray-300 p-6">
+	class="w-2/3 rounded-xl border border-gray-300 p-6 text-gray-800">
 		<div class="text-center">
 			<a href="/" class="contents">
 				<img src="/images/aw-logo-burg.png" alt="" class="mb-6" />
@@ -48,14 +48,14 @@
 				name="firstname"
 				bind:value={requestDetails.firstname}
 				class="w-11/12"
-				placeholder="First name"
+				placeholder="First name (required)"
 			/>
 		</label>
 
 		<textarea
 		name = "comments"
 		bind:value={requestDetails.comments}	
-		placeholder="Dedication or Comment"
+		placeholder="Dedication or Comment (optional)"
 		class="textarea textarea-bordered mt-6 w-11/12 bg-white"
 		></textarea>
 

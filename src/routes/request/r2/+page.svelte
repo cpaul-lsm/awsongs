@@ -47,7 +47,7 @@
 	>
 		<input type="hidden" name="rId" value={rId} />
 		
-		<div class="text-center">
+		<div class="text-center text-gray-800">
 			<a href="/" class="contents">
 				<img src="/images/aw-logo-burg.png" alt="" class="mb-6" />
 			</a>
@@ -67,7 +67,7 @@
 			{/if}
 		</div>
 
-		<div class="flex flex-col items-start">
+		<div class="flex flex-col items-start text-gray-800">
 			{#each songs as song}
 				<div class="form-control">
 					<label class="label cursor-pointer">
@@ -75,18 +75,22 @@
 							type="radio"
 							name="songchecked"
 							id={song.title}
-							class="radio"
+							class="radio border-gray-500"
 							value="{song.title} ({song.artist})"
 							bind:group={songPick}
 						/>
-						<span class="label-text ml-4">{song.title} ({song.artist})</span>
+						<span class="label-text ml-4 text-gray-800">{song.title} ({song.artist})</span>
 					</label>
 				</div>
 			{/each}
 		</div>
 
-		<div class="songpick my-12 font-bold">
-			<p>You have picked {songPick || 'no song yet'}</p>
+		<div class="songpick my-12 font-bold text-gray-800">
+			{#if songPick}
+				<p>You picked {songPick}</p>
+			{:else}
+				<p>Please pick a song from the list above</p>
+			{/if}
 		</div>
 
 		<div class="flex justify-center">
