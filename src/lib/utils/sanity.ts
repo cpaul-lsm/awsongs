@@ -1,7 +1,6 @@
 export function allSongs() {
   return `*[_type == "songs" 
-  && public == true
-  && requested == false
+  && request == true
   && "General" in category
 ] 
 | order(title asc) {
