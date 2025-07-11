@@ -32,10 +32,15 @@
 				<tr>
 					<td>{request.firstname}</td>
 					<td>{request.song}</td>
-					<td>{request.requestedAt}</td>
+					<td>{new Date(request.requestedAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</td>
 				</tr>
-				<tr><td colspan="3">"{request.comments}""</td></tr>
+				{#if request.comments && request.comments.trim()}
+					<tr><td colspan="3">"{request.comments}"</td></tr>
+				{/if}
 			{/each}
 		</tbody>
 	</table>
+	<div>
+		<a href="/request/" class="btn-gray">Back to Requests</a>
+	</div>
 </section>
