@@ -19,7 +19,7 @@
 	});
 </script>
 
-<section class="request-result flex max-w-5xl flex-col items-center justify-center py-6">
+<section class="request-result flex max-w-5xl flex-col items-center justify-center py-6 px-12">
 	<div class="flex flex-col items-center rounded-xl border border-gray-300 p-12">
 		<a href="/" class="contents">
 			<img src="/images/aw-logo-burg.png" alt="" class="mb-12 px-12" />
