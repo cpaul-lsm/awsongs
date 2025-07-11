@@ -13,6 +13,25 @@
 	let rId = $state('');
 	let errorMessage = $state('');
 	let isSubmitting = $state(false); // Add loading state for debugging
+	let submitButton: HTMLButtonElement; // Reference to submit button
+
+	// Function to scroll to submit button
+	function scrollToSubmit() {
+		if (submitButton) {
+			submitButton.scrollIntoView({ 
+				behavior: 'smooth', 
+				block: 'center' 
+			});
+		}
+	}
+
+	// Watch for changes in songPick and scroll to submit button
+	$effect(() => {
+		if (songPick) {
+			// Small delay to ensure the DOM has updated
+			setTimeout(scrollToSubmit, 100);
+		}
+	});
 
 	onMount(() => {
 		if ($page.url.searchParams.has('rId')) {
@@ -96,6 +115,7 @@
 
 		<div class="flex justify-center">
 			<button
+				bind:this={submitButton}
 				type="submit"
 				class="btn flex justify-center bg-gray-700 text-white hover:bg-gray-800"
 				disabled={isSubmitting || !songPick} 
