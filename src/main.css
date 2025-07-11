@@ -93,7 +93,7 @@ h6 {
 
 /* Custom Table Zebra Styles */
 .table-zebra tbody tr:nth-child(2n) {
-  background-color: #ddd; /* Light gray for even rows */
+  background-color: #e3f2fd; /* Light gray for even rows */
 }
 
 .table-zebra tbody tr:nth-child(2n+1) {
@@ -101,6 +101,6 @@ h6 {
 }
 
 .table-zebra tbody tr:hover {
-  background-color: #e3f2fd; /* Light blue on hover */
+  background-color: #ddd; /* Light blue on hover */
 }
 
