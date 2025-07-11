@@ -7,9 +7,15 @@ import { sanityClient as client } from '$lib/server/sanityClient';
 
 export const load: PageServerLoad = async () => {
     try {
+        // Check if environment variables are configured
+        if (!process.env.SANITY_PROJECT_ID || !process.env.SANITY_WRITE_TOKEN) {
+            console.error('Missing Sanity environment variables');
+            throw error(500, 'Sanity configuration missing. Please check your .env file.');
+        }
+
         const songs = await fetchFromSanity(allSongs());
         const requests = await fetchFromSanity(allRequests());
-        console.log('Loaded requests:', requests.map(r => ({ id: r.id, _id: r._id })));
+        console.log('Loaded requests:', requests.map((r: any) => ({ id: r.id, _id: r._id })));
 
         if (!songs || songs.length === 0) {
             throw error(404, 'No songs found');
@@ -21,6 +27,9 @@ export const load: PageServerLoad = async () => {
         };
     } catch (err) {
         console.error('Error in load function:', err);
+        if (err instanceof Error) {
+            throw error(500, `Error fetching data: ${err.message}`);
+        }
         throw error(500, 'Error fetching data');
     }
 };
@@ -39,9 +48,9 @@ export const actions: Actions = {
             }
 
             const requests = await fetchFromSanity(allRequests());
-            console.log('All requests in action:', requests.map(r => ({ id: r.id, _id: r._id, song: r.song })));
+            console.log('All requests in action:', requests.map((r: any) => ({ id: r.id, _id: r._id, song: r.song })));
 
-            const matchingRequest = requests.find((req) => String(req.id) === rId);
+            const matchingRequest = requests.find((req: any) => String(req.id) === rId);
             console.log('Matching request:', matchingRequest);
 
             if (!matchingRequest) {
@@ -64,10 +73,12 @@ export const actions: Actions = {
                 message: 'Song added to request successfully',
                 rId: rId
             };
-        } catch (err) {
-            console.error('Error updating request:', err.message, err.details || err);
+        } catch (err: unknown) {
+            const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+            const errorDetails = (err as any)?.details || '';
+            console.error('Error updating request:', errorMessage, errorDetails);
             return fail(500, { 
-                message: `Failed to update request: ${err.message || 'Unknown error'}`
+                message: `Failed to update request: ${errorMessage}`
             });
         }
     }

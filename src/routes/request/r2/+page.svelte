@@ -16,7 +16,8 @@
 
 	onMount(() => {
 		if ($page.url.searchParams.has('rId')) {
-			rId = $page.url.searchParams.get('rId');
+			const urlRId = $page.url.searchParams.get('rId');
+			rId = urlRId || '';
 			console.log('rId from URL:', rId);
 		} else {
 			rId = '';
@@ -38,7 +39,7 @@
 					console.log('Success, redirecting to:', `/request/r3/?rId=${rId}`);
 					window.location.href = `/request/r3/?rId=${rId}`;
 				} else if (result.type === 'failure') {
-					errorMessage = result.data?.message || 'Failed to submit request';
+					errorMessage = (result.data as any)?.message || 'Failed to submit request';
 					console.error('Form failure:', errorMessage);
 				}
 			};

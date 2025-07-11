@@ -36,3 +36,23 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## Environment Setup
+
+This application requires Sanity CMS configuration. Create a `.env` file in the root directory with the following variables:
+
+```bash
+SANITY_PROJECT_ID=your_sanity_project_id_here
+SANITY_DATASET=production
+SANITY_WRITE_TOKEN=your_sanity_write_token_here
+```
+
+### Getting Sanity Credentials
+
+1. Go to your [Sanity project dashboard](https://www.sanity.io/manage)
+2. Navigate to API settings
+3. Copy your Project ID
+4. Create a new API token with write permissions
+5. Use 'production' as your dataset name (or your preferred dataset)
+
+**Note:** The 500 "Error fetching data" occurs when these environment variables are not properly configured.

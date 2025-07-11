@@ -20,7 +20,7 @@
 </script>
 
 <section class="request-result flex max-w-5xl flex-col items-center justify-center py-6">
-	<div class="flex w-2/3 flex-col items-center rounded-xl border border-gray-300 p-12">
+	<div class="flex flex-col items-center rounded-xl border border-gray-300 p-12">
 		<a href="/" class="contents">
 			<img src="/images/aw-logo-burg.png" alt="" class="mb-12 px-12" />
 		</a>
@@ -45,7 +45,7 @@
 				class="btn mr-6 flex bg-gray-800 text-white hover:bg-gray-700 hover:text-white"
 				>Send a Tip</a
 			>
-			<a href="https://acaciawoodmusic.com/contact-us/" class="btn flex bg-gray-600 text-white hover:bg-gray-500 hover:text-white"
+			<a href="https://acaciawoodmusic.com/contact/" class="btn flex bg-gray-600 text-white hover:bg-gray-500 hover:text-white"
 				>Follow Us</a
 			>
 		</div>
