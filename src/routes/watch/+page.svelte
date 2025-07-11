@@ -12,8 +12,8 @@
 	const formattedDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
 	// Sort the requests by time ascending
-    const sortedRequests = requests.slice().sort((a, b) => {
-        return new Date(a.date + 'T' + a.time) - new Date(b.date + 'T' + b.time);
+    const sortedRequests = requests.slice().sort((a: any, b: any) => {
+        return new Date(b.requestedAt).getTime() - new Date(a.requestedAt).getTime();
     });
 </script>
 
