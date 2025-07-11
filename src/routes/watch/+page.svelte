@@ -18,7 +18,7 @@
 
 	// Function to determine if a row should have gray background
 	function getRowClass(index: number): string {
-		return index % 2 === 0 ? 'bg-gray-100' : 'bg-white';
+		return index % 2 === 0 ? 'bg-blue-100' : 'bg-white';
 	}
 </script>
 
