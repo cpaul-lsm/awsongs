@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { getStores } from '$app/stores';
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 
 	const { page } = getStores();
 	const { data } = $props();
@@ -56,7 +57,7 @@
 				console.log('Form result:', result); // Debug log
 				if (result.type === 'success') {
 					console.log('Success, redirecting to:', `/request/r3/?rId=${rId}`);
-					window.location.href = `/request/r3/?rId=${rId}`;
+					await goto(`/request/r3/?rId=${rId}`);
 				} else if (result.type === 'failure') {
 					errorMessage = (result.data as any)?.message || 'Failed to submit request';
 					console.error('Form failure:', errorMessage);
