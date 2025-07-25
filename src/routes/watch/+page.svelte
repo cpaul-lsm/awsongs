@@ -1,13 +1,16 @@
 <script lang="ts">
      import type { PageData } from './$types';
+     import { enhance } from '$app/forms';
   
   	export let data: PageData;
+  	export let form: any;
 
 	  $: if (data && data.requests) {
       console.log("Requests data:", data.requests);
     }
 
 	let requests = data.requests || [];
+	let showDeleteConfirmation = false;
 
 	const formattedDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -19,6 +22,20 @@
 	// Function to determine if a row should have gray background
 	function getRowClass(index: number): string {
 		return index % 2 === 0 ? 'bg-blue-100' : 'bg-white';
+	}
+
+	function showConfirmation() {
+		showDeleteConfirmation = true;
+	}
+
+	function hideConfirmation() {
+		showDeleteConfirmation = false;
+	}
+
+	function handleDeleteSuccess() {
+		hideConfirmation();
+		// Refresh the page to show updated data
+		window.location.reload();
 	}
 </script>
 
@@ -45,7 +62,59 @@
 			{/each}
 		</tbody>
 	</table>
-	<div>
+	<div class="flex justify-center gap-4">
 		<a href="/request/" class="btn-gray">Back to Requests</a>
+		<button on:click={showConfirmation} class="btn-gray bg-red-600 hover:bg-red-700">Delete All Requests</button>
 	</div>
 </section>
+
+<!-- Confirmation Modal -->
+{#if showDeleteConfirmation}
+	<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+		<div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
+			<h3 class="text-lg font-semibold text-gray-900 mb-4">Confirm Deletion</h3>
+			<p class="text-gray-600 mb-6">
+				Are you sure you want to delete all {sortedRequests.length} requests? This action cannot be undone.
+			</p>
+			<div class="flex justify-end gap-3">
+				<button 
+					on:click={hideConfirmation}
+					class="px-4 py-2 text-gray-600 border border-gray-300 rounded hover:bg-gray-50"
+				>
+					Cancel
+				</button>
+				<form 
+					method="POST" 
+					action="?/deleteAllRequests"
+					use:enhance={() => {
+						return async ({ result }) => {
+							if (result.type === 'success') {
+								handleDeleteSuccess();
+							}
+						};
+					}}
+				>
+					<button 
+						type="submit"
+						class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+					>
+						Delete All
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{/if}
+
+<!-- Success/Error Messages -->
+{#if form?.message}
+	<div class="fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded z-50">
+		{form.message}
+	</div>
+{/if}
+
+{#if form?.error}
+	<div class="fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded z-50">
+		{form.error}
+	</div>
+{/if}
