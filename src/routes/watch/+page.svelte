@@ -10,11 +10,11 @@
     }
 
 	let requests = data.requests || [];
-	let showDeleteConfirmation = false;
+	let showClearConfirmation = false;
 
 	const formattedDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-	// Sort the requests by time ascending
+	// Sort the requests by time descending
     const sortedRequests = requests.slice().sort((a: any, b: any) => {
         return new Date(b.requestedAt).getTime() - new Date(a.requestedAt).getTime();
     });
@@ -25,14 +25,14 @@
 	}
 
 	function showConfirmation() {
-		showDeleteConfirmation = true;
+		showClearConfirmation = true;
 	}
 
 	function hideConfirmation() {
-		showDeleteConfirmation = false;
+		showClearConfirmation = false;
 	}
 
-	function handleDeleteSuccess() {
+	function handleClearSuccess() {
 		hideConfirmation();
 		// Refresh the page to show updated data
 		window.location.reload();
@@ -64,17 +64,17 @@
 	</table>
 	<div class="flex justify-center gap-4">
 		<a href="/request/" class="btn-gray">Back to Requests</a>
-		<button on:click={showConfirmation} class="btn-gray bg-red-600 hover:bg-red-700">Delete All Requests</button>
+		<button on:click={showConfirmation} class="btn-gray bg-red-600 hover:bg-red-700">Clear Requests</button>
 	</div>
 </section>
 
 <!-- Confirmation Modal -->
-{#if showDeleteConfirmation}
+{#if showClearConfirmation}
 	<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
 		<div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
-			<h3 class="text-lg font-semibold text-gray-900 mb-4">Confirm Deletion</h3>
+			<h3 class="text-lg font-semibold text-gray-900 mb-4">Confirm Clear</h3>
 			<p class="text-gray-600 mb-6">
-				Are you sure you want to delete all {sortedRequests.length} requests? This action cannot be undone.
+				Are you sure you want to clear all {sortedRequests.length} requests? This will hide them from the public view.
 			</p>
 			<div class="flex justify-end gap-3">
 				<button 
@@ -85,11 +85,11 @@
 				</button>
 				<form 
 					method="POST" 
-					action="?/deleteAllRequests"
+					action="?/clearAllRequests"
 					use:enhance={() => {
 						return async ({ result }) => {
 							if (result.type === 'success') {
-								handleDeleteSuccess();
+								handleClearSuccess();
 							}
 						};
 					}}
@@ -98,7 +98,7 @@
 						type="submit"
 						class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
 					>
-						Delete All
+						Clear All
 					</button>
 				</form>
 			</div>

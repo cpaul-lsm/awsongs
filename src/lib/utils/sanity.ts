@@ -10,13 +10,15 @@ export function allSongs() {
 }
 
 export function allRequests() {
-  return `*[_type == "requests"]{
+  return `*[_type == "requests"
+  && public == true
+  ]{
    id,
   firstname,
   comments,
   requestedAt,
   song,
-   _id // Include _id for keys in Svelte components
-
+   _id,
+   public
   }`;
 }

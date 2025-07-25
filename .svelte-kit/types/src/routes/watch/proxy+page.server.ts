@@ -29,31 +29,34 @@ export const load = async () => {
 };
 
 export const actions = {
-  deleteAllRequests: async () => {
+  clearAllRequests: async () => {
     try {
       // First, get all request IDs
       const requests = await fetchFromSanity(allRequests());
       
       if (!requests || requests.length === 0) {
-        return fail(400, { message: 'No requests to delete' });
+        return fail(400, { message: 'No requests to clear' });
       }
 
-      // Delete all requests using their _id
-      const deleteOperations = requests.map((request: any) => ({
-        delete: {
-          id: request._id
+      // Update all requests to set public field to false
+      const updateOperations = requests.map((request: any) => ({
+        patch: {
+          id: request._id,
+          set: {
+            public: false
+          }
         }
       }));
 
-      // Execute the deletion transaction
-      const result = await sanityClient.transaction(deleteOperations).commit();
+      // Execute the update transaction
+      const result = await sanityClient.transaction(updateOperations).commit();
 
-      console.log(`Successfully deleted ${requests.length} requests`);
+      console.log(`Successfully cleared ${requests.length} requests`);
       
-      return { success: true, message: `Successfully deleted ${requests.length} requests` };
+      return { success: true, message: `Successfully cleared ${requests.length} requests` };
     } catch (err) {
-      console.error('Error deleting requests:', err);
-      return fail(500, { message: 'Failed to delete requests' });
+      console.error('Error clearing requests:', err);
+      return fail(500, { message: 'Failed to clear requests' });
     }
   }
 };;null as any as PageServerLoad;;null as any as Actions;
