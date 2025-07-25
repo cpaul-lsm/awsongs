@@ -39,6 +39,7 @@
 			const urlRId = $page.url.searchParams.get('rId');
 			rId = urlRId || '';
 			console.log('rId from URL:', rId);
+			console.log('rId type:', typeof rId);
 		} else {
 			rId = '';
 			console.log('No rId in URL');

@@ -13,11 +13,9 @@ export const actions = {
     const requestIdString = formData.get('requestId')?.toString() || '';
     const requestId = parseInt(requestIdString, 10); // Convert to number
     const todaysDate = new Date().toISOString();
-
-    console.log('Received Form Data:', { firstname, comments, requestId, todaysDate });
+    
 
     if (!firstname) {
-      console.log('Validation failed: First name is required.');
       return fail(400, { error: 'First name is required.' });
     }
 
@@ -26,15 +24,14 @@ export const actions = {
       id: requestId,
       requestedAt: todaysDate,
       firstname,
-      comments
+      comments,
+      public: true
     };
 
     try {
       const response = await sanityClient.create(requestDetails);
-      console.log('Sanity Create Response:', response);
       return { success: true }; // Simplified success response
     } catch (error) {
-      console.error('Sanity Error:', error);
       return fail(500, { error: 'Failed to submit. Check server logs.' });
     }
   }

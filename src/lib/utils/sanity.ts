@@ -11,7 +11,7 @@ export function allSongs() {
 
 export function allRequests() {
   return `*[_type == "requests"
-  && public == true
+  && (public == true || !defined(public))
   ]{
    id,
   firstname,

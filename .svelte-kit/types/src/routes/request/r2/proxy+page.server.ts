@@ -56,8 +56,7 @@ export const actions = {
             const result = await client
                 .patch(matchingRequest._id)
                 .set({ 
-                    song: songPick,
-                    public: true
+                    song: songPick
                 })
                 .commit();
 

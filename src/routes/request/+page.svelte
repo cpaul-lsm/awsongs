@@ -9,7 +9,8 @@
 		id: rId,
 		requestedAt: todaysDate,
 		firstname: '',
-		comments: ''
+		comments: '',
+		public: false
 	});
 
 	let errorMessage = $state('');
